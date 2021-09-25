@@ -50,6 +50,7 @@ public class ApiTest {
         allUsers.stream().forEach(u -> {
             Path p = Paths.get(u.getAvatar());
 
+
         });
     }
 }
