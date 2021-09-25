@@ -1,9 +1,10 @@
 import models.ListUsers.User;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utils.RestWrapper;
 
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -11,10 +12,9 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class ApiTest {
+public class ApiTest extends BaseTest {
 
-    private static RestWrapper api;
-    private static List<User> allUsers;
+    public static final Logger log = LogManager.getLogger(ApiTest.class);
 
     @BeforeAll
     public static void getUsers() {
@@ -48,9 +48,9 @@ public class ApiTest {
     @Test
     public void checkIdUserEqualsIdPhoto() {
         allUsers.stream().forEach(u -> {
-            Path p = Paths.get(u.getAvatar());
-
-
+            String nameFileAvatar = Paths.get(u.getAvatar()).getFileName().toString();
+            assertTrue(nameFileAvatar.startsWith(String.valueOf(u.getId())));
+            log.info("Пользователь %s имеет корректный идентификатор аватара", u.getFirstName());
         });
     }
 }
