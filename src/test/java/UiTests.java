@@ -1,21 +1,34 @@
-import org.junit.jupiter.api.BeforeAll;
+import Helper.DbfHelper;
+import io.restassured.response.Response;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
-import org.openqa.selenium.safari.SafariDriver;
-import ui.pages.Catalog;
 import ui.pages.HomePage;
 
 import java.io.IOException;
 
-public class UiTests {
-    HomePage homePage = new HomePage(new SafariDriver());
-    Catalog catalog = new Catalog(new SafariDriver());
-    private final String URL = "https://www.luxoft-training.ru";
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+public class UiTests {
+    static HomePage homePage = new HomePage();
+    private final String URL = "https://www.luxoft-training.ru";
+    DbfHelper dbfHelper = new DbfHelper();
+
+    @AfterAll
+    public static void terDown() {
+        homePage.quitDriver();
+    }
 
     @Test
-    void projectIsConfigured() throws IOException {
+    void testUnloadPdf() throws IOException, InterruptedException {
+        String expectedValue = "Шаблоны проектирования приложений масштаба предприятия";
+        String pathToSave = "/Users/maksimhorovinkin/Downloads/newFile.pdf";
+
         homePage.goTo();
         homePage.clickCatalog();
-//        catalog.clickSaveCourses();
+        Response response = homePage.clickSaveCoursesAndGetApi();
+        homePage.savePdf(response, pathToSave);
+        String textPdf = dbfHelper.readPdf(pathToSave);
+
+        assertTrue(textPdf.contains(expectedValue));
     }
 }

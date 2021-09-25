@@ -39,6 +39,8 @@ dependencies {
 
     testCompile('io.github.bonigarcia:selenium-jupiter:3.3.0')
 
+    compile 'org.apache.pdfbox:pdfbox:2.0.17'
+
 }
 
 test {
