@@ -1,5 +1,5 @@
 import lombok.extern.slf4j.Slf4j;
-import models.ListUsers.User;
+import models.reqresin.listusers.User;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import utils.RestWrapper;
@@ -13,7 +13,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
 public class ApiTest extends BaseTest {
-
 
     @BeforeAll
     public static void getUsers() {
@@ -49,6 +48,7 @@ public class ApiTest extends BaseTest {
         allUsers.stream().forEach(u -> {
             String nameFileAvatar = Paths.get(u.getAvatar()).getFileName().toString();
             assertTrue(nameFileAvatar.startsWith(String.valueOf(u.getId())));
+
             log.info("Пользователь " + u.getFirstName() + " имеет корректный идентификатор аватара = " + nameFileAvatar);
         });
     }

@@ -1,4 +1,4 @@
-package models.reqresin.ListUsers;
+package models.reqresin.listUsers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

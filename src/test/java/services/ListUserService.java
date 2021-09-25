@@ -1,15 +1,15 @@
 package services;
 
 import io.restassured.http.Cookies;
-import models.reqresin.ListUsers.User;
+import models.reqresin.listusers.User;
 
 import java.util.List;
 
 import static io.restassured.RestAssured.given;
 
-public class UserService extends RestService {
+public class ListUserService extends RestService {
 
-    public UserService(Cookies cookies) {
+    public ListUserService(Cookies cookies) {
         super(cookies);
     }
 

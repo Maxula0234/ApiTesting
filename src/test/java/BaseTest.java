@@ -1,4 +1,4 @@
-import models.ListUsers.User;
+import models.reqresin.listusers.User;
 import utils.RestWrapper;
 
 import java.util.List;

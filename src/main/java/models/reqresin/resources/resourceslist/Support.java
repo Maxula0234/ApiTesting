@@ -1,4 +1,4 @@
-package models.reqresin.resources.ds;
+package models.reqresin.resources.resourceslist;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

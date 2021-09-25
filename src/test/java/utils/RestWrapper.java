@@ -4,21 +4,20 @@ package utils;
 import io.restassured.http.ContentType;
 import io.restassured.http.Cookies;
 import io.restassured.specification.RequestSpecification;
-import models.ListUsers.UserLogin;
-import services.UserService;
+import models.reqresin.listusers.UserLogin;
+import services.ListUserService;
 
 import static io.restassured.RestAssured.given;
 
 public class RestWrapper {
-    public UserService userService;
-
     public static final String BASE_URL = "https://reqres.in/api/";
     private static RequestSpecification REQUEST_SPEC_BUILDER;
+    public ListUserService userService;
     private Cookies cookies;
 
     private RestWrapper(Cookies cookie) {
         this.cookies = cookie;
-        userService = new UserService(cookies);
+        userService = new ListUserService(cookies);
     }
 
     public static RestWrapper loginAs(String login, String password) {
