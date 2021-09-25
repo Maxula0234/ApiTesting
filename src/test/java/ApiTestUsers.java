@@ -1,10 +1,9 @@
 import lombok.extern.slf4j.Slf4j;
-import models.reqresin.listusers.User;
+import api.models.reqresin.listusers.User;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import utils.RestWrapper;
+import api.utils.RestWrapper;
 
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -12,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @Slf4j
-public class ApiTest extends BaseTest {
+public class ApiTestUsers extends BaseTest {
 
     @BeforeAll
     public static void getUsers() {
@@ -43,13 +42,4 @@ public class ApiTest extends BaseTest {
         assertTrue(getFilterName.isEmpty());
     }
 
-    @Test
-    public void checkIdUserEqualsIdPhoto() {
-        allUsers.stream().forEach(u -> {
-            String nameFileAvatar = Paths.get(u.getAvatar()).getFileName().toString();
-            assertTrue(nameFileAvatar.startsWith(String.valueOf(u.getId())));
-
-            log.info("Пользователь " + u.getFirstName() + " имеет корректный идентификатор аватара = " + nameFileAvatar);
-        });
-    }
 }

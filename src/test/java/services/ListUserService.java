@@ -1,7 +1,7 @@
 package services;
 
 import io.restassured.http.Cookies;
-import models.reqresin.listusers.User;
+import api.models.reqresin.listusers.User;
 
 import java.util.List;
 

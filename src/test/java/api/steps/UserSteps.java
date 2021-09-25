@@ -1,9 +1,9 @@
-package steps;
+package api.steps;
 
 import io.restassured.builder.RequestSpecBuilder;
 import io.restassured.http.ContentType;
 import io.restassured.specification.RequestSpecification;
-import models.reqresin.listusers.User;
+import api.models.reqresin.listusers.User;
 
 import java.util.List;
 

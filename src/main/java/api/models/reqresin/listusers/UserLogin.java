@@ -1,4 +1,4 @@
-package models.reqresin.listusers;
+package api.models.reqresin.listusers;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;

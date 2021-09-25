@@ -1,8 +1,8 @@
-package models.reqresin.resources;
+package api.models.reqresin.resources.resourceslist;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Data{
+public class DataItem{
 
 	@JsonProperty("color")
 	private String color;
