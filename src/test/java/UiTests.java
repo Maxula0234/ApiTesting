@@ -1,10 +1,11 @@
+import Constant.WebDriverName;
 import com.google.common.io.Resources;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.*;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.Utils;
+import ui.WebDriverFactory;
 import ui.pages.HomePage;
 import ui.utils.Helper.DbfHelper;
 
@@ -25,7 +26,7 @@ public class UiTests {
 
     @BeforeEach
     public void setDriver() {
-        this.driver = new ChromeDriver();
+        this.driver = WebDriverFactory.getWebDriver(WebDriverName.CHROME);
         driver.manage().window().maximize();
         this.wait = new WebDriverWait(driver, 5);
         homePage = new HomePage(driver, wait);
