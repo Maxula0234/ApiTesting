@@ -5,49 +5,32 @@ import lombok.extern.slf4j.Slf4j;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 
 import static io.restassured.RestAssured.given;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 @Slf4j
-public class HomePage {
-
-    private final String URL = "https://www.luxoft-training.ru";
+public class HomePage extends BasePage {
     By catalog = new By.ByXPath("//*[@id=\"header\"]/div[1]/div/div[1]/nav/ul/li[1]/a");
     By saveCatalog = new By.ByLinkText("Скачать каталог");
-    private WebDriver driver;
-    private WebDriverWait wait;
 
-    public HomePage() {
-        System.setProperty("webdriver.chrome.driver", "/Users/maksimhorovinkin/Downloads/chromedriver 2");
-
-        this.driver = new ChromeDriver();
-        driver.manage().window().maximize();
-        this.wait = new WebDriverWait(driver, 30);
+    public HomePage(WebDriver driver, WebDriverWait wait) {
+        super(driver, wait);
     }
 
     public void openHomePage() {
-        driver.get(URL);
+        driver.get(BASE_URL);
+        waitVisib(catalog);
     }
 
     public void clickCatalog() {
-        WebElement element = driver.findElement(catalog);
-        element.click();
-    }
-
-    public void quitDriver() {
-        driver.quit();
+        waitAndClick(catalog);
     }
 
     public Response clickSaveCoursesAndGetApi() throws IOException, InterruptedException {
-        WebElement save = wait.until(visibilityOfElementLocated(saveCatalog));
+        WebElement save = waitVisib(saveCatalog);
         String href = save.getAttribute("href");
 
         return given().contentType("application/pdf").baseUri(href).get();

@@ -1,6 +1,9 @@
+import com.google.common.io.Resources;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.AfterAll;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import ui.Utils;
 import ui.pages.HomePage;
 import ui.utils.Helper.DbfHelper;
@@ -10,13 +13,29 @@ import java.io.IOException;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UiTests {
-    static HomePage homePage = new HomePage();
-    private final String URL = "https://www.luxoft-training.ru";
-    DbfHelper dbfHelper = new DbfHelper();
+    public HomePage homePage;
+    public DbfHelper dbfHelper = new DbfHelper();
+    public WebDriverWait wait;
+    private WebDriver driver;
 
-    @AfterAll
-    public static void terDown() {
-        homePage.quitDriver();
+    @BeforeAll
+    public static void setChromBinaries() {
+        System.setProperty("webdriver.chrome.driver", Resources.getResource("chromedriver").getPath());
+    }
+
+    @BeforeEach
+    public void setDriver() {
+        this.driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        this.wait = new WebDriverWait(driver, 5);
+        homePage = new HomePage(driver, wait);
+    }
+
+    @AfterEach
+    public void closeDriver() {
+        if (driver != null) {
+            driver.quit();
+        }
     }
 
     @Test
