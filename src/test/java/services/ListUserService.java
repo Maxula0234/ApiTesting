@@ -1,7 +1,7 @@
 package services;
 
+import api.models.reqresin.listusers.DataItem;
 import io.restassured.http.Cookies;
-import api.models.reqresin.listusers.User;
 
 import java.util.List;
 
@@ -17,10 +17,11 @@ public class ListUserService extends RestService {
     protected String getBasePath() {
         return "/users";
     }
-    
-    public List<User> getAllUsers() {
-        return given().spec(REQUEST_SPEC_BUILDER).get()
-                .jsonPath().getList("data", User.class);
+
+    public List<DataItem> getAllUsers() {
+        return given().spec(REQUEST_SPEC)
+                .get()
+                .jsonPath().getList("data",DataItem.class);
     }
 
 }

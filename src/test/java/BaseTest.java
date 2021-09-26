@@ -1,12 +1,12 @@
-import api.models.reqresin.listusers.User;
+import RestWrapper.RestWrapper;
+import api.models.reqresin.listusers.DataItem;
 import api.models.reqresin.resources.resourceslist.Resources;
-import api.utils.RestWrapper;
 
 import java.util.List;
 
 public class BaseTest {
 
     public static RestWrapper api;
-    public static List<User> allUsers;
-    public static Resources allResources;
+    public static List<DataItem> allUsers;
+    public static Resources gerResources;
 }
