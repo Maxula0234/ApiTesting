@@ -1,8 +1,9 @@
-import Helper.DbfHelper;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
+import ui.Utils;
 import ui.pages.HomePage;
+import ui.utils.Helper.DbfHelper;
 
 import java.io.IOException;
 
@@ -23,10 +24,10 @@ public class UiTests {
         String expectedValue = "Шаблоны проектирования приложений масштаба предприятия";
         String pathToSave = "/Users/maksimhorovinkin/Downloads/newFile.pdf";
 
-        homePage.goTo();
+        homePage.openHomePage();
         homePage.clickCatalog();
         Response response = homePage.clickSaveCoursesAndGetApi();
-        homePage.savePdf(response, pathToSave);
+        Utils.savePdf(response, pathToSave);
         String textPdf = dbfHelper.readPdf(pathToSave);
 
         assertTrue(textPdf.contains(expectedValue));

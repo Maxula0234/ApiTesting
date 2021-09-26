@@ -1,4 +1,4 @@
-package api.models.reqresin.listusers;
+package api.models.reqresin;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
@@ -21,4 +21,6 @@ public class UserLogin {
     public String getEmail() {
         return email;
     }
+
+
 }

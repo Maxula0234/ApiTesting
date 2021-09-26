@@ -1,14 +1,8 @@
 package api.models.reqresin.listusers;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.NoArgsConstructor;
 
-@JsonIgnoreProperties(ignoreUnknown = true)
-@Builder @NoArgsConstructor @AllArgsConstructor
-public class User {
+public class DataItem{
 
 	@JsonProperty("last_name")
 	private String lastName;

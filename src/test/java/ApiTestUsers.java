@@ -1,8 +1,9 @@
+import RestWrapper.RestWrapper;
+import api.models.reqresin.listusers.DataItem;
 import lombok.extern.slf4j.Slf4j;
-import api.models.reqresin.listusers.User;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import api.utils.RestWrapper;
+import steps.UserSteps;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -16,7 +17,7 @@ public class ApiTestUsers extends BaseTest {
     @BeforeAll
     public static void getUsers() {
         api = RestWrapper.loginAs("eve.holt@reqres.in", "cityslicka");
-        allUsers = api.userService.getAllUsers();
+        allUsers = UserSteps.getAllUsers();
     }
 
     @Test
@@ -27,7 +28,7 @@ public class ApiTestUsers extends BaseTest {
     @Test
     public void testCheckUserWithNamePositive() throws RuntimeException {
         String expectedUserName = "George";
-        User getUser = allUsers.stream().filter(u -> u.getFirstName().equals(expectedUserName))
+        DataItem getUser = allUsers.stream().filter(u -> u.getFirstName().equals(expectedUserName))
                 .findFirst()
                 .orElseThrow(() -> new RuntimeException("Пользователь не найден"));
         assertEquals(expectedUserName, getUser.getFirstName());
@@ -37,7 +38,7 @@ public class ApiTestUsers extends BaseTest {
     public void testCheckUserWithNameNegative() {
         String expectedName = "Byron";
 
-        List<User> getFilterName = allUsers.stream().filter(f -> f.getFirstName().equals(expectedName))
+        List<DataItem> getFilterName = allUsers.stream().filter(f -> f.getFirstName().equals(expectedName))
                 .collect(Collectors.toList());
         assertTrue(getFilterName.isEmpty());
     }

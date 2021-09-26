@@ -33,7 +33,7 @@ public class HomePage {
         this.wait = new WebDriverWait(driver, 30);
     }
 
-    public void goTo() {
+    public void openHomePage() {
         driver.get(URL);
     }
 
@@ -53,19 +53,4 @@ public class HomePage {
         return given().contentType("application/pdf").baseUri(href).get();
     }
 
-    public void savePdf(Response response, String pathToSave) throws IOException {
-        OutputStream outStream = null;
-        File outputFile = new File(pathToSave);
-
-        try {
-            outStream = new FileOutputStream(outputFile);
-            outStream.write(response.asByteArray());
-        } catch (Exception e) {
-            System.out.println("Error writing file " + outputFile.getAbsolutePath());
-        } finally {
-            if (outStream != null) {
-                outStream.close();
-            }
-        }
-    }
 }
